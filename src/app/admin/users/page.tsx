@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { requireAdmin } from "@/lib/session";
+import { CreateUserForm } from "./create-user-form";
 
 export default function AdminUsersPage() {
   return (
@@ -25,23 +26,26 @@ async function UserList() {
   });
 
   return (
-    <table className="w-full border-collapse text-sm">
-      <thead>
-        <tr className="border-b text-left">
-          <th className="py-2">Nama</th>
-          <th className="py-2">Email</th>
-          <th className="py-2">Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map((user) => (
-          <tr key={user.id} className="border-b">
-            <td className="py-2">{user.name}</td>
-            <td className="py-2">{user.email}</td>
-            <td className="py-2">{user.role}</td>
+    <>
+      <CreateUserForm />
+      <table className="w-full border-collapse text-sm">
+        <thead>
+          <tr className="border-b text-left">
+            <th className="py-2">Nama</th>
+            <th className="py-2">Email</th>
+            <th className="py-2">Role</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id} className="border-b">
+              <td className="py-2">{user.name}</td>
+              <td className="py-2">{user.email}</td>
+              <td className="py-2">{user.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
