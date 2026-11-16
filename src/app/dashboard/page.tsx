@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { getCurrentUser } from "@/lib/session";
 import { signOut } from "@/lib/auth-action";
+import Link from "next/link";
 
 export default function DashboardPage() {
   return (
@@ -27,6 +28,11 @@ async function UserInfo() {
           {user.role}
         </span>
       </p>
+      {user.role === "admin" && (
+        <Link href="/admin/users" className="text-blue-600 underline">
+          Kelola user
+        </Link>
+      )}
       <form action={signOut}>
         <button type="submit" className="rounded border px-4 py-2">
           Logout

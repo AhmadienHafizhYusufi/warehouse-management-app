@@ -22,3 +22,13 @@ export async function getCurrentUser(): Promise<CurrentUser> {
   const { id, name, email, role } = session.user;
   return { id, name, email, role: role ?? "staff" };
 }
+
+export async function requireAdmin(): Promise<CurrentUser> {
+  const user = await getCurrentUser();
+
+  if (user.role !== "admin") {
+    redirect("/dashboard");
+  }
+
+  return user;
+}
